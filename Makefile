@@ -26,4 +26,3 @@ ifndef BRANCH
 	$(error Usage: make git-pull BRANCH=my-branch)
 endif
 	cd $(PX4_DIR) && git pull origin $(BRANCH)
-
