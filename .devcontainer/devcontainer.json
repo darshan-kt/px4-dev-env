@@ -1,0 +1,24 @@
+{
+  "name": "PX4 Dev",
+  "build": {
+    "dockerfile": "../docker/Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/PX4-Autopilot",
+  "remoteUser": "px4",
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "ms-python.python"
+  ],
+  "mounts": [
+    "source=${localWorkspaceFolder}/PX4-Autopilot,target=/workspaces/PX4-Autopilot,type=bind"
+  ],
+  "runArgs": [
+    "--privileged",
+    "--env=DISPLAY=${env:DISPLAY}",
+    "--env=QT_X11_NO_MITSHM=1",
+    "--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+    "--volume=${env:HOME}/.Xauthority:/home/px4/.Xauthority:rw"
+  ]
+}
