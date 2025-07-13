@@ -26,7 +26,7 @@ Make sure you have the following installed on your system:
 Use `--recurse-submodules` to clone PX4-Autopilot along with the environment:
 
 ```bash
-git clone --recurse-submodules https://github.com/your-username/px4-dev-env.git
+git clone --recurse-submodules https://github.com/darshan-kt/px4-dev-env.git
 cd px4-dev-env
 ````
 
