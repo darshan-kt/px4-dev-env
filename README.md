@@ -1,139 +1,133 @@
 
 ---
 
-### 📄 `README.md` – High-Level Overview for PX4 Dev Environment
+### 📥 Quick Start for Users
 
-```markdown
-# PX4 Development Environment (DevContainer + Docker)
+````markdown
+# 🚀 Getting Started with PX4 Dev Environment
 
-This repository sets up a portable, reproducible development environment for the [PX4-Autopilot](https://github.com/PX4/PX4-Autopilot) flight stack using Docker and Visual Studio Code DevContainers.
-
-✅ No need to install toolchains on your host  
-✅ Works identically across Linux, macOS, and WSL  
-✅ Supports Gazebo, PX4 SITL, and Git-based workflow
+This repository provides a ready-to-use PX4 development environment using Docker + VSCode DevContainers.
 
 ---
 
-## 🛠️ Requirements
+## ✅ Prerequisites
 
-* Docker (>= 20.10)
-* VSCode + Remote Containers extension
-* X11 support (Linux) for Gazebo GUI
+Make sure you have the following installed on your system:
 
----
-
-## 📁 Repository Structure
-
-```
-
-px4-dev-env/
-├── PX4-Autopilot/        # PX4 source code (cloned or submodule)
-├── docker/               # Dockerfile for PX4 build environment
-├── .devcontainer/        # VSCode dev container configuration
-├── Makefile              # Helper CLI commands
-└── README.md             # This file
-
-````
+- [Docker](https://www.docker.com/products/docker-desktop) (version 20.10+)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- VSCode extension: **Remote - Containers**
+- (Optional) X11 support (for Gazebo GUI, e.g. XQuartz on macOS)
 
 ---
 
-## 🚀 Quick Start
+## 📦 Clone This Repository
 
-### 1. Clone the Repo
+Use `--recurse-submodules` to clone PX4-Autopilot along with the environment:
 
 ```bash
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive
-mkdir px4-dev-env && cd px4-dev-env
-mv ../PX4-Autopilot .
+git clone --recurse-submodules https://github.com/your-username/px4-dev-env.git
+cd px4-dev-env
 ````
 
-Or, if using as a Git submodule:
+If you forget `--recurse-submodules`, run this after cloning:
 
 ```bash
-git submodule add https://github.com/PX4/PX4-Autopilot.git
 git submodule update --init --recursive
 ```
 
 ---
 
-### 2. Build the Docker Image
+## 🧠 What's Inside
 
-```bash
-make docker-build
 ```
-
-This uses the Dockerfile inside `docker/` to install all PX4 and Gazebo dependencies.
+px4-dev-env/
+├── PX4-Autopilot/        # PX4 flight stack (Git submodule)
+├── docker/               # Dockerfile for dev environment
+├── .devcontainer/        # VSCode container config
+├── Makefile              # Helper commands (used *inside* container)
+└── README.md             # You're here!
+```
 
 ---
 
-### 3. Launch in VSCode
-
-* Open this folder in VSCode:
+## 🖥️ Open in VSCode
 
 ```bash
 code .
 ```
 
-* Run: `F1` → `Remote-Containers: Reopen in Container`
+Then press:
+
+```text
+F1 → Remote-Containers: Reopen in Container
+```
 
 VSCode will:
 
-* Build the image (if needed)
-* Launch the container
-* Mount PX4-Autopilot for development
+* Build the Docker image (from `docker/Dockerfile`)
+* Mount your PX4 code into the container
+* Set up the development environment (toolchain, Python, CMake, etc.)
 
 ---
 
-### 4. Build PX4
+## 🧪 Building and Testing PX4 (Inside the Container)
 
-In the VSCode terminal:
-
-```bash
-cd /workspaces/PX4-Autopilot
-make px4_sitl_default
-```
-
-To test in Gazebo:
+Once you're inside the container terminal, run:
 
 ```bash
-make px4_sitl_default gazebo
+make px4-build          # Build PX4 SITL
+make px4-gazebo         # Run PX4 with Gazebo simulator
+make px4-clean          # Clean build artifacts
 ```
 
 ---
 
-## 🔁 Git Workflow
+## 🔁 Git Workflow (Inside the Container)
 
-### Use Git normally from inside the container:
+The container sees your host files directly — so you can commit changes like normal:
 
 ```bash
 cd /workspaces/PX4-Autopilot
 git checkout -b my-feature
-# make changes
+# Make changes...
 git add .
-git commit -m "Add new feature"
+git commit -m "Add new flight pattern"
 git push origin my-feature
 ```
----
 
-## 💡 Why Use DevContainers?
+Or use helper shortcuts:
 
-* Reproducible builds across devs/CI
-* Fully configured toolchain
-* Works with VSCode's IntelliSense & debugger
-* Easy Git integration
-* Gazebo + GUI support via X11
+```bash
+make git-status
+make git-push BRANCH=my-feature
+```
 
 ---
 
-## ✅ Next Steps
+## 📌 Notes
 
-* Add missions or custom PX4 modules
-* Use GitHub Actions with same Dockerfile
-* Extend this to run PX4 on real hardware
+* Gazebo will launch if X11 forwarding is configured correctly on your system.
+* The build environment is based on Ubuntu 20.04 with Gazebo Classic 11.
+* You can modify or add your own PX4 apps, modules, and missions.
 
 ---
 
-Happy flying! ✈️
-Maintainer: Darshan K T
+## 🙌 Contributing
 
+Feel free to fork and modify this environment for your own robotics, drone, or simulation projects.
 
+---
+
+Happy flying! 🛸
+Maintainer: **Darshan K T**
+
+```
+
+---
+
+Let me know if you'd like:
+- This customized with your actual GitHub repo URL
+- A template version others can clone/fork
+- A one-liner badge-style header (`DevContainer Ready`, `Dockerized PX4`, etc.) for GitHub flair
+```
