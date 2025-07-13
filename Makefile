@@ -1,45 +1,29 @@
-# -------------------------------
-# PX4 Build Targets
-# -------------------------------
+# Path to PX4 source
+PX4_DIR := PX4-Autopilot
 
-.PHONY: px4-build
+.PHONY: px4-build px4-gazebo px4-clean git-status git-push git-pull
+
 px4-build:
-	make px4_sitl_default
+	cd $(PX4_DIR) && make px4_sitl_default
 
-.PHONY: px4-gazebo
 px4-gazebo:
-	make px4_sitl_default gazebo
+	cd $(PX4_DIR) && make px4_sitl_default gazebo
 
-.PHONY: px4-clean
 px4-clean:
-	make clean
+	cd $(PX4_DIR) && make clean
 
-# -------------------------------
-# Git Helper Targets
-# -------------------------------
-
-.PHONY: git-status
 git-status:
-	git status
+	cd $(PX4_DIR) && git status
 
-.PHONY: git-branch
-git-branch:
-	git branch
-
-.PHONY: git-push
 git-push:
 ifndef BRANCH
-	$(error Usage: make git-push BRANCH=branch-name)
+	$(error Usage: make git-push BRANCH=my-branch)
 endif
-	git push origin $(BRANCH)
+	cd $(PX4_DIR) && git push origin $(BRANCH)
 
-.PHONY: git-pull
 git-pull:
 ifndef BRANCH
-	$(error Usage: make git-pull BRANCH=branch-name)
+	$(error Usage: make git-pull BRANCH=my-branch)
 endif
-	git pull origin $(BRANCH)
+	cd $(PX4_DIR) && git pull origin $(BRANCH)
 
-.PHONY: git-log
-git-log:
-	git log --oneline --graph --decorate --all
