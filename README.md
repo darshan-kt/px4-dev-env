@@ -125,9 +125,9 @@ Maintainer: **Darshan K T**
 ```
 
 ---
+This repo gives an overview about devcontainer with PX4-Autopilot software. 
+But this repo still needs to be updated. I will try to update asap.. Thanks
 
-Let me know if you'd like:
-- This customized with your actual GitHub repo URL
-- A template version others can clone/fork
-- A one-liner badge-style header (`DevContainer Ready`, `Dockerized PX4`, etc.) for GitHub flair
+Fix need for this repo:
+Whatever changes I do inside PX4, it actually reflecting inside the official PX4 repo. Need to figure-out the way to avoid this.
 ```
